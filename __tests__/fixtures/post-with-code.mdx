@@ -1,0 +1,40 @@
+---
+title: "Code-heavy post for reading time tests"
+publishedAt: "2026-02-01T08:00:00.000Z"
+excerpt: "A post with lots of code blocks to test reading time calculation."
+tags:
+  - code
+  - tutorial
+---
+
+Here is some text before the code.
+
+```typescript
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const result = fibonacci(10);
+console.log(result);
+
+function factorial(n: number): number {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+const factResult = factorial(10);
+console.log(factResult);
+```
+
+Here is some text after the code. Just a few words here and there to keep the reading time low.
+
+<SomeComponent prop="value" />
+
+<!-- This is a comment that should be stripped -->
+
+<AnotherComponent>
+  Some content inside a component that should not count.
+</AnotherComponent>
+
+Final paragraph with a few more words.
