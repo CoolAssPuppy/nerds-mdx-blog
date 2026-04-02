@@ -78,6 +78,102 @@ describe("stripCodeBlocksAndComponents", () => {
     expect(result).not.toContain("const a = 1");
     expect(result).not.toContain("x = 2");
   });
+
+  it("should strip code blocks that contain triple backtick references in text", () => {
+    const input = [
+      "Explanation of code fences:",
+      "```markdown",
+      "Use ``` to start a code block.",
+      "Then close with ```.",
+      "```",
+      "That was the example.",
+    ].join("\n");
+    const result = stripCodeBlocksAndComponents(input);
+
+    expect(result).toContain("Explanation of code fences:");
+    expect(result).toContain("That was the example.");
+    expect(result).not.toContain("Use ");
+  });
+
+  it("should strip multi-line JSX components with nested content", () => {
+    const input = [
+      "Before the callout.",
+      "<Callout>",
+      "  This is a warning.",
+      "  It spans multiple lines.",
+      "</Callout>",
+      "After the callout.",
+    ].join("\n");
+    const result = stripCodeBlocksAndComponents(input);
+
+    expect(result).toContain("Before the callout.");
+    expect(result).toContain("After the callout.");
+    expect(result).not.toContain("This is a warning.");
+    expect(result).not.toContain("It spans multiple lines.");
+    expect(result).not.toContain("Callout");
+  });
+
+  it("should strip self-closing components with multiple props", () => {
+    const input =
+      'Text before <Image src="/photo.jpg" alt="A photo" width={800} height={600} /> text after.';
+    const result = stripCodeBlocksAndComponents(input);
+
+    expect(result).toContain("Text before");
+    expect(result).toContain("text after.");
+    expect(result).not.toContain("Image");
+    expect(result).not.toContain("photo.jpg");
+  });
+
+  it("should strip multi-line HTML comments", () => {
+    const input = [
+      "Visible text.",
+      "<!--",
+      "  This is a hidden",
+      "  multi-line comment.",
+      "-->",
+      "More visible text.",
+    ].join("\n");
+    const result = stripCodeBlocksAndComponents(input);
+
+    expect(result).toContain("Visible text.");
+    expect(result).toContain("More visible text.");
+    expect(result).not.toContain("hidden");
+    expect(result).not.toContain("multi-line comment");
+  });
+
+  it("should handle mixed strippable content types together", () => {
+    const input = [
+      "Intro paragraph with `inline code` here.",
+      "",
+      "```typescript",
+      "const x = 42;",
+      "```",
+      "",
+      "<Alert type='warning'>Watch out!</Alert>",
+      "",
+      "<!-- TODO: add more content -->",
+      "",
+      "<CodeExample />",
+      "",
+      "Final paragraph.",
+    ].join("\n");
+    const result = stripCodeBlocksAndComponents(input);
+
+    expect(result).toContain("Intro paragraph with");
+    expect(result).toContain("here.");
+    expect(result).not.toContain("inline code");
+    expect(result).not.toContain("const x = 42");
+    expect(result).not.toContain("Alert");
+    expect(result).not.toContain("Watch out!");
+    expect(result).not.toContain("TODO");
+    expect(result).not.toContain("CodeExample");
+    expect(result).toContain("Final paragraph.");
+  });
+
+  it("should handle empty string input", () => {
+    const result = stripCodeBlocksAndComponents("");
+    expect(result).toBe("");
+  });
 });
 
 describe("calculateReadingTime", () => {
