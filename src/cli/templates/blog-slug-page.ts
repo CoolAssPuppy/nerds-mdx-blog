@@ -1,6 +1,8 @@
 // JSON-LD structured data uses dangerouslySetInnerHTML per Next.js convention.
 // The data is generated server-side from trusted config, not user input.
 export const blogSlugPageTemplate = `import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { blog } from "@/lib/blog";
 import {
@@ -11,6 +13,7 @@ import {
   generateBreadcrumbJsonLd,
   generateFAQJsonLd,
   generateHowToJsonLd,
+  formatTagName,
 } from "nerds-mdx-blog";
 import {
   BlogContent,
@@ -33,17 +36,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return { title: "Not found" };
 
   const url = \\\`\\\${blog.config.siteUrl}\\\${blog.config.blog.basePath}/\\\${slug}\\\`;
+  const description = post.description || post.excerpt;
+
   return {
     title: post.title,
-    description: post.description || post.excerpt,
+    description,
     alternates: { canonical: url },
     openGraph: {
       title: post.title,
-      description: post.description || post.excerpt,
+      description,
       type: "article",
       publishedTime: post.publishedAt,
       ...(post.updatedAt && { modifiedTime: post.updatedAt }),
+      ...(blog.config.author.name && { authors: [blog.config.author.name] }),
       url,
+      images: post.featureImage ? [post.featureImage] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      ...(blog.config.author.twitter && { creator: blog.config.author.twitter }),
+      images: post.featureImage ? [post.featureImage] : undefined,
     },
   };
 }
@@ -96,13 +110,39 @@ export default async function BlogPostPage({ params }: PageProps) {
             month: "long",
             day: "numeric",
           })}
-          {post.readingTime && \\\` \u00b7 \\\${post.readingTime} min read\\\`}
+          {post.readingTime && \\\` \\u00b7 \\\${post.readingTime} min read\\\`}
         </time>
         <h1 className="mt-4 text-4xl font-bold text-foreground">
           {post.title}
         </h1>
         <p className="mt-4 text-xl text-muted-foreground">{post.excerpt}</p>
+        {post.tags && post.tags.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <Link
+                key={tag}
+                href={\\\`\\\${blog.config.blog.basePath}/tag/\\\${encodeURIComponent(tag)}\\\`}
+                className="px-3 py-1 bg-muted text-muted-foreground text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                {formatTagName(tag, blog.config.tagAcronyms)}
+              </Link>
+            ))}
+          </div>
+        )}
       </header>
+
+      {post.featureImage && (
+        <div className="relative h-64 sm:h-96 lg:h-[500px] mb-12 rounded-xl overflow-hidden shadow-lg">
+          <Image
+            src={post.featureImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
+        </div>
+      )}
 
       <TableOfContents content={post.content} />
 

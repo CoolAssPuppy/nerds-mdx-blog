@@ -47,21 +47,114 @@ Your content here. Regular markdown works.
 And **bold**, *italic*, [links](https://example.com), code blocks, and everything else markdown supports.
 ```
 
-### Frontmatter fields
+### Frontmatter reference
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `title` | Yes | Post title |
-| `publishedAt` | Yes | ISO 8601 date. Future dates are hidden in production |
-| `excerpt` | Yes | 1-2 sentence summary for listings and meta description |
-| `description` | No | SEO description (falls back to excerpt) |
-| `featureImage` | No | Path to hero image (e.g., `/images/blog/my-post.jpg`) |
-| `featured` | No | Set to `true` to mark as featured |
-| `tags` | No | Array of kebab-case tags |
-| `updatedAt` | No | ISO date. Shown when different from publishedAt |
-| `articleType` | No | `"article"`, `"tech"`, or `"howto"` for JSON-LD schema |
-| `faqs` | No | Array of `{ question, answer }` for FAQ schema |
-| `howToSteps` | No | Array of `{ name, text }` for HowTo schema |
+Every MDX file starts with a YAML frontmatter block between `---` markers. Here is every supported field:
+
+```yaml
+---
+# REQUIRED FIELDS
+
+title: "How to build a developer blog"
+# The post title. Displayed on the post page, in blog cards, RSS feed,
+# OpenGraph tags, and JSON-LD structured data.
+
+publishedAt: "2026-04-01T08:00:00.000Z"
+# ISO 8601 date and time. Controls sort order and scheduled publishing.
+# Posts with a future date are visible in development but hidden from
+# production listings until the date arrives. The date also appears in
+# RSS <pubDate>, OpenGraph publishedTime, and JSON-LD datePublished.
+
+excerpt: "A step-by-step guide to setting up an MDX blog with Next.js."
+# 1-2 sentence summary. Used in blog card listings, RSS <description>,
+# and as the default meta description for SEO if `description` is not set.
+
+# OPTIONAL FIELDS
+
+description: "Learn how to create a production-ready MDX blog..."
+# SEO-specific meta description for the <meta name="description"> tag
+# and OpenGraph description. If omitted, falls back to `excerpt`.
+# Use this when you want a different description for search engines
+# than what appears in blog card listings.
+
+featureImage: "/images/blog/developer-blog.jpg"
+# Path to the hero image. Rendered prominently at the top of the post
+# page below the title. Also used as the OpenGraph image and Twitter
+# card image for social sharing. Place images in your public/ directory.
+# Displayed in blog cards on the listing page as well.
+
+featured: true
+# When true, the post is included in `getFeaturedPosts()` results.
+# The BlogCard component renders featured posts in a wider layout.
+# Default: false.
+
+tags:
+  - nextjs
+  - tutorial
+  - getting-started
+# Array of kebab-case strings for categorization. Powers the tag
+# filtering system (/blog/tag/nextjs), related post scoring, and
+# search. Tags are displayed as clickable pills on the post page.
+# The formatTagName function converts them to display names
+# (e.g., "nextjs" -> "Nextjs", "ai" -> "AI").
+
+updatedAt: "2026-06-15T08:00:00.000Z"
+# ISO 8601 date. When present and different from publishedAt, the
+# post page shows both the publish and update dates. Also used in
+# OpenGraph modifiedTime and JSON-LD dateModified. If omitted,
+# dateModified defaults to publishedAt.
+
+articleType: "tech"
+# Controls which JSON-LD schema type is generated for the post.
+# Values:
+#   "article"  -> schema.org/Article (default)
+#   "tech"     -> schema.org/TechArticle (adds proficiencyLevel)
+#   "howto"    -> schema.org/TechArticle (same as tech)
+# If omitted, the system auto-detects from the title: posts with
+# "how to", "guide", "tutorial", "framework", or "playbook" in
+# the title get TechArticle. Everything else gets Article.
+
+faqs:
+  - question: "What is MDX?"
+    answer: "MDX is markdown with JSX support."
+  - question: "Do I need to know React?"
+    answer: "Not for basic usage. MDX looks like regular markdown."
+# Array of question/answer pairs. When present, generates a
+# schema.org/FAQPage JSON-LD schema on the post page. This can
+# trigger FAQ rich results in Google Search, showing your Q&A
+# directly in search results.
+
+howToSteps:
+  - name: "Install the package"
+    text: "Run npm install nerds-mdx-blog in your project."
+  - name: "Initialize"
+    text: "Run npx nerds-mdx-blog init to scaffold the blog."
+  - name: "Write your first post"
+    text: "Create an MDX file in content/blog/ with frontmatter."
+# Array of step objects. When present, generates a schema.org/HowTo
+# JSON-LD schema on the post page. This can trigger how-to rich
+# results in Google Search with a numbered step display.
+---
+```
+
+### Where each field appears
+
+| Field | Blog card | Post page | OpenGraph | Twitter card | RSS feed | JSON-LD |
+|-------|-----------|-----------|-----------|--------------|----------|---------|
+| `title` | Title | H1 heading | og:title | twitter:title | item title | headline |
+| `publishedAt` | Date | Date | publishedTime | -- | pubDate | datePublished |
+| `excerpt` | Summary | Subtitle | (fallback) | (fallback) | description | description |
+| `description` | -- | -- | og:description | twitter:description | -- | description |
+| `featureImage` | Card image | Hero image | og:image | twitter:image | -- | image |
+| `featured` | Wide layout | -- | -- | -- | -- | -- |
+| `tags` | (searchable) | Tag pills | -- | -- | -- | -- |
+| `updatedAt` | -- | Update date | modifiedTime | -- | -- | dateModified |
+| `articleType` | -- | -- | -- | -- | -- | @type |
+| `faqs` | -- | -- | -- | -- | -- | FAQPage |
+| `howToSteps` | -- | -- | -- | -- | -- | HowTo |
+| `readingTime` | "Xm read" | "X min read" | -- | -- | -- | -- |
+
+Reading time is calculated automatically from the post content (excluding code blocks and JSX components). You do not set it in frontmatter.
 
 ### Filename convention
 
@@ -191,6 +284,56 @@ Every component accepts a `className` prop:
 ### Tier 3: Edit the route files
 
 The `init` command scaffolds route files into your `app/` directory. You own these files. Change the layout, add your logo, wrap components in your own markup -- whatever you need. The route files are intentionally simple and readable.
+
+## Layouts, headers, and footers
+
+The blog pages are regular Next.js App Router pages inside your `app/` directory. They automatically inherit your site's root `layout.tsx`, which means your existing header, footer, navigation, and global styles apply to every blog page with zero configuration.
+
+If you want blog-specific layout (a sidebar, different header, etc.), create a `layout.tsx` inside `app/blog/`:
+
+```tsx
+// app/blog/layout.tsx
+export default function BlogLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="blog-wrapper">
+      {/* Blog-specific header, sidebar, etc. */}
+      {children}
+    </div>
+  );
+}
+```
+
+## Breadcrumbs
+
+### Structured data (automatic)
+
+Every blog post page automatically includes a `BreadcrumbList` JSON-LD schema in the page head:
+
+```
+Home > Blog > Post Title
+```
+
+This is invisible to users but tells search engines about your site hierarchy. Google can use it to display breadcrumbs in search results. It works out of the box -- no configuration needed.
+
+### Visible breadcrumbs (bring your own)
+
+The package does not ship a visible breadcrumb UI component because most sites already have one that matches their design system. To add visible breadcrumbs, edit the scaffolded `[slug]/page.tsx` and add your breadcrumb component above the header:
+
+```tsx
+// In app/blog/[slug]/page.tsx, inside the return:
+<div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+  {/* Add your breadcrumb component here */}
+  <nav className="text-sm text-muted-foreground mb-6">
+    <a href="/">Home</a> / <a href="/blog">Blog</a> / {post.title}
+  </nav>
+
+  <header className="mb-12">
+    {/* ... rest of the page */}
+  </header>
+</div>
+```
+
+The scaffolded route files are yours to edit. The package provides the data and rendering; you control the layout.
 
 ### NerdsUI integration
 
