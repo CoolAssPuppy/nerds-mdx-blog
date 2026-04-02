@@ -32,7 +32,7 @@ export const blogTagPageTemplate = [
   "  const formatted = formatTagName(decodedTag, blog.config.tagAcronyms);",
   "",
   "  return (",
-  '    <div className="bg-white min-h-screen">',
+  '    <div className="bg-white min-h-screen text-slate-900 font-sans text-base antialiased">',
   "      <TagNavigation",
   "        allTags={allTags}",
   "        tagCounts={tagCounts}",

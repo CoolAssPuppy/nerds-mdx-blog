@@ -100,7 +100,7 @@ export const blogSlugPageTemplate = [
   "        />",
   "      )}",
   "",
-  '      <article className="bg-white min-h-screen">',
+  '      <article className="bg-white min-h-screen text-slate-900 font-sans text-base antialiased">',
   "        {/* Header */}",
   '        <header className="border-b border-slate-200 bg-slate-50">',
   '          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">',

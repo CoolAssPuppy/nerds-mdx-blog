@@ -16,7 +16,7 @@ export const blogPageTemplate = [
   "  const jsonLd = generateCollectionJsonLd(posts.slice(0, 20), blog.config);",
   "",
   "  return (",
-  '    <div className="bg-white min-h-screen">',
+  '    <div className="bg-white min-h-screen text-slate-900 font-sans text-base antialiased">',
   "      <script",
   '        type="application/ld+json"',
   "        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}",
