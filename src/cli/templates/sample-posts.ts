@@ -1,59 +1,60 @@
 export const samplePost1 = `---
 title: "Welcome to Strategic Nerds"
 publishedAt: "${new Date().toISOString().split("T")[0]}T08:00:00.000Z"
-excerpt: "Strategic Nerds is where developer marketing meets practical advice. No fluff. No buzzwords. Just what works."
-featureImage: ""
+excerpt: "Strategic Nerds is the blog of Prashant Sridharan, a developer marketing leader with thirty years in tech. Practical advice on developer relations, product marketing, and go-to-market strategy."
 featured: true
 tags:
-  - getting-started
   - developer-marketing
+  - getting-started
 ---
 
-You found us. Good.
+Strategic Nerds is where developer marketing gets practical.
 
-Strategic Nerds is a blog about developer marketing, developer relations, and building products that developers actually want to use. It is written by Prashant Sridharan, who has spent thirty years in tech doing exactly that.
+I'm Prashant Sridharan. I've spent thirty years building and marketing developer tools at companies like Sun Microsystems, Microsoft, Amazon Web Services, Meta, Twitter, and Supabase. I started as a developer. Then I spent the rest of my career figuring out how to reach developers like the one I used to be.
+
+This blog is where I write about what I've learned. Developer relations. Product marketing. Content strategy. Go-to-market planning. Positioning and messaging. The real work of building products developers want to use and then getting those products in front of the right people.
 
 ## What you will find here
 
-Posts about positioning, content strategy, go-to-market planning, and the day-to-day work of marketing to developers. Real examples from real companies. Opinions backed by experience. And the occasional rant about things that do not work.
+Posts grounded in experience, not theory. Real examples from real companies. Frameworks you can use tomorrow. And the occasional strong opinion about things that do not work.
+
+If you want the full picture, read my book [Picks and Shovels: Marketing to Developers During the AI Gold Rush](https://www.strategicnerds.com/book). It covers everything from developer advocacy to pricing strategy to product-led growth. It hit #1 on Amazon, which was a nice surprise.
 
 ## Why "Strategic Nerds"?
 
-Because the best developer marketing comes from people who understand the technology *and* the business. You need both. Strategy without technical depth is empty. Technical depth without strategy is a blog post nobody reads.
+The best developer marketing comes from people who understand the technology *and* the business. You need both. Strategy without technical depth is empty. Technical depth without strategy is a blog post nobody reads.
 
-## Start reading
-
-Browse the posts. Find something useful. And if you want to go deeper, check out the book *Picks and Shovels: Marketing to Developers During the AI Gold Rush*.
+Start browsing. Find something useful. And if you want to go deeper, visit [strategicnerds.com](https://www.strategicnerds.com) for training, resources, and more.
 `;
 
 export const samplePost2 = `---
 title: "The Midnight Coder's Children"
 publishedAt: "${new Date(Date.now() - 86400000).toISOString().split("T")[0]}T08:00:00.000Z"
-excerpt: "A novel about immigration, identity, and the invisible code that runs beneath every family."
+excerpt: "A propulsive, emotionally grounded thriller about trust, legacy, and the fragile bonds that hold both families and civilizations together. Coming September 22, 2026."
 tags:
   - fiction
   - writing
 ---
 
-At 5:43am on a Saturday, Maya Raghavan pressed her badge to the reader at Building 7. The lab was dark except for the glow of seventeen monitors, each cycling through feeds she had memorized the way other mothers memorized lullabies.
+I wrote a novel.
 
-She set her coffee on the desk -- black, no sugar, the same order for eleven years -- and opened the terminal.
+It is called *The Midnight Coder's Children*, and it comes out September 22, 2026 from Bodhi Press.
 
-\`\`\`
-> STATUS: ALL SYSTEMS NOMINAL
-> LAST ANOMALY: 47 HOURS AGO
-> UPTIME: 99.97%
-\`\`\`
+## The premise
 
-The numbers told one story. The three missed calls from her daughter told another.
+It is a race against the clock to save the US financial system from total collapse.
 
-## About the book
+Sydney McEnroe is the VP of engineering for one of the world's most important financial institutions, and today is her worst nightmare. Her bank is the victim of a vicious cyberattack. She knows who to call. She knows what to do. What she has not accounted for? The key to restoring security is hidden in a former employee's missing cipher.
 
-*The Midnight Coder's Children* is a novel about a family caught between two worlds: the country they left and the one that will never fully have them. It is about the code we write and the code that writes us. About mothers and daughters and the distances that technology cannot bridge.
+Decades earlier, tech pioneer Gayathri Ramaswamy predicted an attack of this magnitude while building the bank's systems, but no one listened. She engineered a complex safety protocol, one that could only be discovered by those who truly understood the sacrifices and strength of an immigrant and single mother. As the cyberattack escalates, Sydney must track down Gayathri's surviving children in order to piece together the mind and method of a misunderstood genius before time runs out and the global economy is catapulted into chaos.
 
 <Callout variant="tip" title="Read more">
-  This is a sample blog post demonstrating MDX components like callouts. Replace it with your own content.
+  Visit [midnightcoders.com](https://www.midnightcoders.com) for more about the book, including the first chapter.
 </Callout>
 
-The book is available wherever books are sold. Or it will be, once it is finished.
+## Why I wrote it
+
+I have spent my career in tech. I have watched brilliant people build systems that the world depends on and then get forgotten. I wanted to write a story about that. About the legacies we make for ourselves, the fragile trust that holds families and civilizations together, and the extraordinary systems built, byte by byte, by overlooked people.
+
+It is a techno-thriller. It is also a novel about immigration, identity, and what we owe the people who built the foundations we stand on.
 `;
