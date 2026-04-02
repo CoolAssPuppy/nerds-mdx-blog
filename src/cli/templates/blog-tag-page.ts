@@ -1,0 +1,67 @@
+export const blogTagPageTemplate = `import { blog } from "@/lib/blog";
+import { BlogCard, TagNavigation } from "nerds-mdx-blog/components";
+import { formatTagName } from "nerds-mdx-blog";
+import type { Metadata } from "next";
+
+type PageProps = {
+  params: Promise<{ tag: string }>;
+};
+
+export async function generateStaticParams() {
+  return blog.getAllTags().map((tag) => ({ tag: encodeURIComponent(tag) }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
+  const formatted = formatTagName(decodedTag, blog.config.tagAcronyms);
+
+  return {
+    title: \`\${formatted} articles\`,
+    robots: { index: false, follow: true },
+  };
+}
+
+export default async function TagPage({ params }: PageProps) {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
+  const posts = blog.getPostsByTag(decodedTag);
+  const allTags = blog.getAllTags();
+  const tagCounts = blog.getTagCounts();
+  const formatted = formatTagName(decodedTag, blog.config.tagAcronyms);
+
+  return (
+    <div>
+      <TagNavigation
+        allTags={allTags}
+        tagCounts={tagCounts}
+        currentTag={decodedTag}
+        basePath={blog.config.blog.basePath}
+        tagAcronyms={blog.config.tagAcronyms}
+      />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-3xl font-bold text-foreground mb-8">
+          {formatted}
+          <span className="ml-2 text-muted-foreground text-lg font-normal">
+            ({posts.length} {posts.length === 1 ? "post" : "posts"})
+          </span>
+        </h1>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <BlogCard
+              key={post.slug}
+              slug={post.slug}
+              title={post.title}
+              excerpt={post.excerpt}
+              publishedAt={post.publishedAt}
+              featureImage={post.featureImage}
+              readingTime={post.readingTime}
+              basePath={blog.config.blog.basePath}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+`;
