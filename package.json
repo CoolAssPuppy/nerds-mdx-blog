@@ -51,26 +51,18 @@
     "rehype-pretty-code": "^0.14.1",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
+    "mermaid": "^11.0.0",
+    "react-tweet": "^3.3.0",
     "shiki": "^3.20.0",
     "unist-util-visit": "^5.1.0"
   },
   "peerDependencies": {
     "@tailwindcss/typography": ">=0.5",
-    "mermaid": ">=10",
     "next": ">=14",
     "next-mdx-remote": ">=5",
     "react": ">=18",
     "react-dom": ">=18",
-    "react-tweet": ">=3",
     "tailwindcss": ">=3"
-  },
-  "peerDependenciesMeta": {
-    "mermaid": {
-      "optional": true
-    },
-    "react-tweet": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.0",

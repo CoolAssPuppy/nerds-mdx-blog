@@ -1,35 +1,37 @@
 export const blogApiRouteTemplate = (siteUrl: string, basePath: string) =>
-  `import { blog } from "@/lib/blog";
-import { NextRequest, NextResponse } from "next/server";
-
-export const dynamic = "force-static";
-
-export async function GET(request: NextRequest): Promise<NextResponse> {
-  const { searchParams } = new URL(request.url);
-  const limit = searchParams.get("limit");
-
-  const allPosts = blog.getAllPosts();
-  const posts = limit ? allPosts.slice(0, Number(limit)) : allPosts;
-
-  return NextResponse.json(
-    {
-      posts: posts.map((post) => ({
-        slug: post.slug,
-        title: post.title,
-        excerpt: post.excerpt,
-        publishedAt: post.publishedAt,
-        featureImage: post.featureImage
-          ? \`${siteUrl}\${post.featureImage}\`
-          : undefined,
-        url: \`${siteUrl}${basePath}/\${post.slug}\`,
-      })),
-      total: allPosts.length,
-    },
-    {
-      headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-      },
-    }
-  );
-}
-`;
+  [
+    'import { blog } from "@/lib/blog";',
+    'import { NextRequest, NextResponse } from "next/server";',
+    "",
+    'export const dynamic = "force-static";',
+    "",
+    "export async function GET(request: NextRequest): Promise<NextResponse> {",
+    "  const { searchParams } = new URL(request.url);",
+    '  const limit = searchParams.get("limit");',
+    "",
+    "  const allPosts = blog.getAllPosts();",
+    "  const posts = limit ? allPosts.slice(0, Number(limit)) : allPosts;",
+    "",
+    "  return NextResponse.json(",
+    "    {",
+    "      posts: posts.map((post) => ({",
+    "        slug: post.slug,",
+    "        title: post.title,",
+    "        excerpt: post.excerpt,",
+    "        publishedAt: post.publishedAt,",
+    "        featureImage: post.featureImage",
+    `          ? \`${siteUrl}\${post.featureImage}\``,
+    "          : undefined,",
+    `        url: \`${siteUrl}${basePath}/\${post.slug}\`,`,
+    "      })),",
+    "      total: allPosts.length,",
+    "    },",
+    "    {",
+    "      headers: {",
+    '        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",',
+    "      },",
+    "    }",
+    "  );",
+    "}",
+    "",
+  ].join("\n");

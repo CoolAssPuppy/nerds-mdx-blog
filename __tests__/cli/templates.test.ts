@@ -147,14 +147,10 @@ describe("CLI templates", () => {
       );
     });
 
-    it("markdown-route imports stripCodeBlocksAndComponents and sets content type", () => {
-      expect(markdownRouteTemplate).toContain(
-        "stripCodeBlocksAndComponents"
-      );
-      expect(markdownRouteTemplate).toContain(
-        `from "${SCOPED_PACKAGE}"`
-      );
+    it("markdown-route imports blog and sets text/markdown content type", () => {
+      expect(markdownRouteTemplate).toContain('from "@/lib/blog"');
       expect(markdownRouteTemplate).toContain("text/markdown");
+      expect(markdownRouteTemplate).toContain("generateStaticParams");
     });
   });
 

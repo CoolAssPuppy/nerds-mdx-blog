@@ -1,172 +1,173 @@
-// JSON-LD structured data uses dangerouslySetInnerHTML per Next.js convention.
-// The data is generated server-side from trusted config, not user input.
-export const blogSlugPageTemplate = `import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { blog } from "@/lib/blog";
-import {
-  getMdxComponents,
-  getRemarkPlugins,
-  getRehypePlugins,
-  generateArticleJsonLd,
-  generateBreadcrumbJsonLd,
-  generateFAQJsonLd,
-  generateHowToJsonLd,
-  formatTagName,
-} from "@strategicnerds/nerds-mdx-blog";
-import {
-  BlogContent,
-  TableOfContents,
-  RelatedPosts,
-} from "@strategicnerds/nerds-mdx-blog/components";
-import type { Metadata } from "next";
-
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-export async function generateStaticParams() {
-  return blog.getAllPosts().map((post) => ({ slug: post.slug }));
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = blog.getPostBySlug(slug);
-  if (!post) return { title: "Not found" };
-
-  const url = \\\`\\\${blog.config.siteUrl}\\\${blog.config.blog.basePath}/\\\${slug}\\\`;
-  const description = post.description || post.excerpt;
-
-  return {
-    title: post.title,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      title: post.title,
-      description,
-      type: "article",
-      publishedTime: post.publishedAt,
-      ...(post.updatedAt && { modifiedTime: post.updatedAt }),
-      ...(blog.config.author.name && { authors: [blog.config.author.name] }),
-      url,
-      images: post.featureImage ? [post.featureImage] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description,
-      ...(blog.config.author.twitter && { creator: blog.config.author.twitter }),
-      images: post.featureImage ? [post.featureImage] : undefined,
-    },
-  };
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
-  const post = blog.getPostBySlug(slug);
-  if (!post) notFound();
-
-  const relatedPosts = blog.getRelatedPosts(slug, 3);
-  const components = getMdxComponents();
-
-  const articleJsonLd = generateArticleJsonLd(post, blog.config);
-  const breadcrumbJsonLd = generateBreadcrumbJsonLd(post, blog.config);
-
-  return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]),
-        }}
-      />
-      {post.faqs && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateFAQJsonLd(post.faqs)),
-          }}
-        />
-      )}
-      {post.howToSteps && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              generateHowToJsonLd(post, post.howToSteps, blog.config)
-            ),
-          }}
-        />
-      )}
-
-      <header className="mb-12">
-        <time
-          dateTime={post.publishedAt}
-          className="text-sm text-muted-foreground"
-        >
-          {new Date(post.publishedAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-          {post.readingTime && \\\` \\u00b7 \\\${post.readingTime} min read\\\`}
-        </time>
-        <h1 className="mt-4 text-4xl font-bold text-foreground">
-          {post.title}
-        </h1>
-        <p className="mt-4 text-xl text-muted-foreground">{post.excerpt}</p>
-        {post.tags && post.tags.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <Link
-                key={tag}
-                href={\\\`\\\${blog.config.blog.basePath}/tag/\\\${encodeURIComponent(tag)}\\\`}
-                className="px-3 py-1 bg-muted text-muted-foreground text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                {formatTagName(tag, blog.config.tagAcronyms)}
-              </Link>
-            ))}
-          </div>
-        )}
-      </header>
-
-      {post.featureImage && (
-        <div className="relative h-64 sm:h-96 lg:h-[500px] mb-12 rounded-xl overflow-hidden shadow-lg">
-          <Image
-            src={post.featureImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
-        </div>
-      )}
-
-      <TableOfContents content={post.content} />
-
-      <BlogContent>
-        <article className="prose prose-lg max-w-none prose-a:text-primary prose-headings:text-foreground prose-p:text-foreground">
-          <MDXRemote
-            source={post.content}
-            components={components}
-            options={{
-              mdxOptions: {
-                remarkPlugins: getRemarkPlugins(),
-                rehypePlugins: getRehypePlugins() as never,
-              },
-            }}
-          />
-        </article>
-      </BlogContent>
-
-      <RelatedPosts
-        posts={relatedPosts}
-        currentSlug={slug}
-        basePath={blog.config.blog.basePath}
-      />
-    </div>
-  );
-}
-`;
+// Template uses string concatenation to avoid nested template literal escaping issues.
+export const blogSlugPageTemplate = [
+  'import { notFound } from "next/navigation";',
+  'import Image from "next/image";',
+  'import Link from "next/link";',
+  'import { MDXRemote } from "next-mdx-remote/rsc";',
+  'import { blog } from "@/lib/blog";',
+  "import {",
+  "  getMdxComponents,",
+  "  getRemarkPlugins,",
+  "  getRehypePlugins,",
+  "  generateArticleJsonLd,",
+  "  generateBreadcrumbJsonLd,",
+  "  generateFAQJsonLd,",
+  "  generateHowToJsonLd,",
+  "  formatTagName,",
+  '} from "@strategicnerds/nerds-mdx-blog";',
+  "import {",
+  "  BlogContent,",
+  "  TableOfContents,",
+  "  RelatedPosts,",
+  '} from "@strategicnerds/nerds-mdx-blog/components";',
+  'import type { Metadata } from "next";',
+  "",
+  "type PageProps = {",
+  "  params: Promise<{ slug: string }>;",
+  "};",
+  "",
+  "export async function generateStaticParams() {",
+  "  return blog.getAllPosts().map((post) => ({ slug: post.slug }));",
+  "}",
+  "",
+  "export async function generateMetadata({ params }: PageProps): Promise<Metadata> {",
+  "  const { slug } = await params;",
+  "  const post = blog.getPostBySlug(slug);",
+  '  if (!post) return { title: "Not found" };',
+  "",
+  "  const url = `${blog.config.siteUrl}${blog.config.blog.basePath}/${slug}`;",
+  "  const description = post.description || post.excerpt;",
+  "",
+  "  return {",
+  "    title: post.title,",
+  "    description,",
+  "    alternates: { canonical: url },",
+  "    openGraph: {",
+  "      title: post.title,",
+  "      description,",
+  '      type: "article",',
+  "      publishedTime: post.publishedAt,",
+  "      ...(post.updatedAt && { modifiedTime: post.updatedAt }),",
+  "      ...(blog.config.author.name && { authors: [blog.config.author.name] }),",
+  "      url,",
+  "      images: post.featureImage ? [post.featureImage] : undefined,",
+  "    },",
+  "    twitter: {",
+  '      card: "summary_large_image",',
+  "      title: post.title,",
+  "      description,",
+  "      ...(blog.config.author.twitter && { creator: blog.config.author.twitter }),",
+  "      images: post.featureImage ? [post.featureImage] : undefined,",
+  "    },",
+  "  };",
+  "}",
+  "",
+  "export default async function BlogPostPage({ params }: PageProps) {",
+  "  const { slug } = await params;",
+  "  const post = blog.getPostBySlug(slug);",
+  "  if (!post) notFound();",
+  "",
+  "  const relatedPosts = blog.getRelatedPosts(slug, 3);",
+  "  const components = getMdxComponents();",
+  "",
+  "  const articleJsonLd = generateArticleJsonLd(post, blog.config);",
+  "  const breadcrumbJsonLd = generateBreadcrumbJsonLd(post, blog.config);",
+  "",
+  "  return (",
+  '    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">',
+  "      <script",
+  '        type="application/ld+json"',
+  "        dangerouslySetInnerHTML={{",
+  "          __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]),",
+  "        }}",
+  "      />",
+  "      {post.faqs && (",
+  "        <script",
+  '          type="application/ld+json"',
+  "          dangerouslySetInnerHTML={{",
+  "            __html: JSON.stringify(generateFAQJsonLd(post.faqs)),",
+  "          }}",
+  "        />",
+  "      )}",
+  "      {post.howToSteps && (",
+  "        <script",
+  '          type="application/ld+json"',
+  "          dangerouslySetInnerHTML={{",
+  "            __html: JSON.stringify(",
+  "              generateHowToJsonLd(post, post.howToSteps, blog.config)",
+  "            ),",
+  "          }}",
+  "        />",
+  "      )}",
+  "",
+  '      <header className="mb-12">',
+  "        <time",
+  "          dateTime={post.publishedAt}",
+  '          className="text-sm text-muted-foreground"',
+  "        >",
+  '          {new Date(post.publishedAt).toLocaleDateString("en-US", {',
+  '            year: "numeric",',
+  '            month: "long",',
+  '            day: "numeric",',
+  "          })}",
+  "          {post.readingTime && ` \\u00b7 ${post.readingTime} min read`}",
+  "        </time>",
+  '        <h1 className="mt-4 text-4xl font-bold text-foreground">',
+  "          {post.title}",
+  "        </h1>",
+  '        <p className="mt-4 text-xl text-muted-foreground">{post.excerpt}</p>',
+  "        {post.tags && post.tags.length > 0 && (",
+  '          <div className="mt-6 flex flex-wrap gap-2">',
+  "            {post.tags.map((tag) => (",
+  "              <Link",
+  "                key={tag}",
+  "                href={`${blog.config.blog.basePath}/tag/${encodeURIComponent(tag)}`}",
+  '                className="px-3 py-1 bg-muted text-muted-foreground text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"',
+  "              >",
+  "                {formatTagName(tag, blog.config.tagAcronyms)}",
+  "              </Link>",
+  "            ))}",
+  "          </div>",
+  "        )}",
+  "      </header>",
+  "",
+  "      {post.featureImage && (",
+  '        <div className="relative h-64 sm:h-96 lg:h-[500px] mb-12 rounded-xl overflow-hidden shadow-lg">',
+  "          <Image",
+  "            src={post.featureImage}",
+  "            alt={post.title}",
+  "            fill",
+  '            className="object-cover"',
+  "            priority",
+  '            sizes="(max-width: 1200px) 100vw, 1200px"',
+  "          />",
+  "        </div>",
+  "      )}",
+  "",
+  "      <TableOfContents content={post.content} />",
+  "",
+  "      <BlogContent>",
+  '        <article className="prose prose-lg max-w-none prose-a:text-primary prose-headings:text-foreground prose-p:text-foreground">',
+  "          <MDXRemote",
+  "            source={post.content}",
+  "            components={components}",
+  "            options={{",
+  "              mdxOptions: {",
+  "                remarkPlugins: getRemarkPlugins(),",
+  "                rehypePlugins: getRehypePlugins() as never,",
+  "              },",
+  "            }}",
+  "          />",
+  "        </article>",
+  "      </BlogContent>",
+  "",
+  "      <RelatedPosts",
+  "        posts={relatedPosts}",
+  "        currentSlug={slug}",
+  "        basePath={blog.config.blog.basePath}",
+  "      />",
+  "    </div>",
+  "  );",
+  "}",
+  "",
+].join("\n");
