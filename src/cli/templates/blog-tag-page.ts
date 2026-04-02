@@ -1,6 +1,6 @@
 export const blogTagPageTemplate = `import { blog } from "@/lib/blog";
-import { BlogCard, TagNavigation } from "nerds-mdx-blog/components";
-import { formatTagName } from "nerds-mdx-blog";
+import { BlogCard, TagNavigation } from "@strategicnerds/nerds-mdx-blog/components";
+import { formatTagName } from "@strategicnerds/nerds-mdx-blog";
 import type { Metadata } from "next";
 
 type PageProps = {

@@ -5,7 +5,7 @@ Drop-in MDX blog for Next.js. Install, init, write posts.
 ## Quickstart
 
 ```bash
-npm install nerds-mdx-blog
+npm install @strategicnerds/nerds-mdx-blog
 npx nerds-mdx-blog init
 npm run dev
 ```
@@ -126,7 +126,7 @@ faqs:
 
 howToSteps:
   - name: "Install the package"
-    text: "Run npm install nerds-mdx-blog in your project."
+    text: "Run npm install @strategicnerds/nerds-mdx-blog in your project."
   - name: "Initialize"
     text: "Run npx nerds-mdx-blog init to scaffold the blog."
   - name: "Write your first post"
@@ -229,7 +229,7 @@ The URLs are automatically converted to embedded players. No component import ne
 The `init` command creates a `blog.config.ts` at your project root:
 
 ```typescript
-import { defineConfig } from "nerds-mdx-blog";
+import { defineConfig } from "@strategicnerds/nerds-mdx-blog";
 
 export default defineConfig({
   siteUrl: "https://example.com",
@@ -370,7 +370,7 @@ Builds the post metadata manifest for production. This runs automatically as a p
 If you need programmatic access to your blog data:
 
 ```typescript
-import { createBlog } from "nerds-mdx-blog";
+import { createBlog } from "@strategicnerds/nerds-mdx-blog";
 import config from "./blog.config";
 
 const blog = createBlog(config);

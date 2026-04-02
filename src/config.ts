@@ -14,7 +14,7 @@ export function resolveConfig(config: BlogConfig): ResolvedBlogConfig {
     blog: {
       title: config.blog?.title ?? "Blog",
       description:
-        config.blog?.description ?? "A blog powered by nerds-mdx-blog",
+        config.blog?.description ?? "A blog powered by @strategicnerds/nerds-mdx-blog",
       basePath: config.blog?.basePath ?? "/blog",
       contentDir: config.blog?.contentDir ?? "content/blog",
       postsPerPage: config.blog?.postsPerPage ?? 12,

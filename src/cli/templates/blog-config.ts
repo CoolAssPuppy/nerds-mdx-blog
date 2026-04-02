@@ -1,4 +1,4 @@
-export const blogConfigTemplate = `import { defineConfig } from "nerds-mdx-blog";
+export const blogConfigTemplate = `import { defineConfig } from "@strategicnerds/nerds-mdx-blog";
 
 export default defineConfig({
   siteUrl: "https://example.com", // TODO: Replace with your site URL

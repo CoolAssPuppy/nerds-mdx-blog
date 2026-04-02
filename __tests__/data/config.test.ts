@@ -17,7 +17,7 @@ describe("resolveConfig", () => {
 
     expect(resolved.siteUrl).toBe("https://example.com");
     expect(resolved.blog.title).toBe("Blog");
-    expect(resolved.blog.description).toBe("A blog powered by nerds-mdx-blog");
+    expect(resolved.blog.description).toBe("A blog powered by @strategicnerds/nerds-mdx-blog");
     expect(resolved.blog.basePath).toBe("/blog");
     expect(resolved.blog.contentDir).toBe("content/blog");
     expect(resolved.blog.postsPerPage).toBe(12);
@@ -86,7 +86,7 @@ describe("resolveConfig", () => {
     expect(resolved.blog.title).toBe("Acme Blog");
     expect(resolved.blog.basePath).toBe("/articles");
     expect(resolved.blog.postsPerPage).toBe(24);
-    expect(resolved.blog.description).toBe("A blog powered by nerds-mdx-blog");
+    expect(resolved.blog.description).toBe("A blog powered by @strategicnerds/nerds-mdx-blog");
     expect(resolved.author.name).toBe("John Doe");
     expect(resolved.author.email).toBe("john@acme.com");
     expect(resolved.author.url).toBe("");

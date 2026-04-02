@@ -111,7 +111,7 @@ export function runInit(options: InitOptions = {}): InitResult {
 
     if (project.hasTailwind) {
       try {
-        patchTailwindConfig(projectRoot, "nerds-mdx-blog");
+        patchTailwindConfig(projectRoot, "@strategicnerds/nerds-mdx-blog");
         filesModified.push("tailwind.config.*");
       } catch {
         warnings.push("Could not patch tailwind config.");
@@ -146,7 +146,7 @@ export function runInit(options: InitOptions = {}): InitResult {
 }
 
 function fallbackCss(): string {
-  return `/* nerds-mdx-blog fallback tokens -- delete this file if you install NerdsUI */
-@import "nerds-mdx-blog/css/fallback.css";
+  return `/* @strategicnerds/nerds-mdx-blog fallback tokens -- delete this file if you install NerdsUI */
+@import "@strategicnerds/nerds-mdx-blog/css/fallback.css";
 `;
 }

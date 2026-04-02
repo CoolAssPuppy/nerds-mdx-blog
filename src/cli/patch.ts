@@ -35,7 +35,7 @@ export function patchTailwindConfig(
     if (!content.includes("nerds-mdx-blog")) {
       content = content.replace(
         /content:\s*\[/,
-        'content: [\n    "./node_modules/nerds-mdx-blog/dist/**/*.{js,jsx}",',
+        'content: [\n    "./node_modules/@strategicnerds/nerds-mdx-blog/dist/**/*.{js,jsx}",',
       );
       fs.writeFileSync(configPath, content);
     }
@@ -59,7 +59,7 @@ export function patchNextConfig(projectRoot: string): void {
     if (!content.includes("transpilePackages")) {
       content = content.replace(
         /const nextConfig\s*[:=]\s*{/,
-        'const nextConfig = {\n  transpilePackages: ["nerds-mdx-blog"],',
+        'const nextConfig = {\n  transpilePackages: ["@strategicnerds/nerds-mdx-blog"],',
       );
     }
 

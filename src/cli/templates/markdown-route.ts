@@ -1,5 +1,5 @@
 export const markdownRouteTemplate = `import { blog } from "@/lib/blog";
-import { stripCodeBlocksAndComponents } from "nerds-mdx-blog";
+import { stripCodeBlocksAndComponents } from "@strategicnerds/nerds-mdx-blog";
 import { notFound } from "next/navigation";
 
 type RouteProps = {

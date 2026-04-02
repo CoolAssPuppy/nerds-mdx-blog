@@ -1,8 +1,8 @@
 // JSON-LD structured data uses dangerouslySetInnerHTML per Next.js convention.
 // The data is generated server-side from trusted config, not user input.
 export const blogPageTemplate = `import { blog } from "@/lib/blog";
-import { BlogGrid } from "nerds-mdx-blog/components";
-import { generateCollectionJsonLd } from "nerds-mdx-blog";
+import { BlogGrid } from "@strategicnerds/nerds-mdx-blog/components";
+import { generateCollectionJsonLd } from "@strategicnerds/nerds-mdx-blog";
 
 export const revalidate = 86400;
 

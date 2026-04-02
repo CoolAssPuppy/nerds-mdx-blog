@@ -1,5 +1,8 @@
 {
-  "name": "nerds-mdx-blog",
+  "name": "@strategicnerds/nerds-mdx-blog",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.1.0",
   "description": "Drop-in MDX blog for Next.js. Install, init, write posts.",
   "license": "MIT",

@@ -1,5 +1,5 @@
 export const rssRouteTemplate = `import { blog } from "@/lib/blog";
-import { generateRssFeed } from "nerds-mdx-blog";
+import { generateRssFeed } from "@strategicnerds/nerds-mdx-blog";
 
 export const dynamic = "force-static";
 export const revalidate = false;

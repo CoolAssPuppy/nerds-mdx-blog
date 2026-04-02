@@ -14,12 +14,12 @@ import {
   generateFAQJsonLd,
   generateHowToJsonLd,
   formatTagName,
-} from "nerds-mdx-blog";
+} from "@strategicnerds/nerds-mdx-blog";
 import {
   BlogContent,
   TableOfContents,
   RelatedPosts,
-} from "nerds-mdx-blog/components";
+} from "@strategicnerds/nerds-mdx-blog/components";
 import type { Metadata } from "next";
 
 type PageProps = {
