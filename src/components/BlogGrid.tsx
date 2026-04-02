@@ -101,17 +101,13 @@ export function BlogGrid({
   if (initialPosts.length === 0) {
     return (
       <div className="text-center py-24">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-          <svg className="w-8 h-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
+          <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
           </svg>
         </div>
-        <p className="text-muted-foreground text-lg font-medium">
-          No blog posts yet
-        </p>
-        <p className="text-muted-foreground/60 text-sm mt-2">
-          Check back soon for new content.
-        </p>
+        <p className="text-slate-500 text-lg font-medium">No blog posts yet</p>
+        <p className="text-slate-400 text-sm mt-2">Check back soon for new content.</p>
       </div>
     );
   }
@@ -121,7 +117,7 @@ export function BlogGrid({
       <div className="mb-10">
         <div className="relative max-w-xl">
           <svg
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/60"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -139,32 +135,22 @@ export function BlogGrid({
             value={query}
             onChange={handleQueryChange}
             placeholder={`Search ${initialPosts.length} posts...`}
-            className="w-full pl-12 pr-10 py-3.5 text-base bg-card border border-border/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all duration-200 placeholder:text-muted-foreground/50 shadow-sm"
+            className="w-full pl-12 pr-10 py-3.5 text-base bg-white text-slate-900 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all duration-200 placeholder:text-slate-400 shadow-sm"
           />
           {query.length > 0 && (
             <button
               onClick={clearSearch}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-all duration-150"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all duration-150"
               aria-label="Clear search"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           )}
         </div>
         {isFiltering && (
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="mt-3 text-sm text-slate-500">
             {filteredPosts.length === 1
               ? "1 post found"
               : `${filteredPosts.length} posts found`}
@@ -192,25 +178,10 @@ export function BlogGrid({
       {!isFiltering && hasMore && (
         <div ref={loaderRef} className="flex justify-center py-16">
           {isLoading ? (
-            <div className="flex items-center gap-3 text-muted-foreground">
-              <svg
-                className="animate-spin h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
+            <div className="flex items-center gap-3 text-slate-500">
+              <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
               <span className="text-sm">Loading more...</span>
             </div>
@@ -222,13 +193,13 @@ export function BlogGrid({
 
       {isFiltering && filteredPosts.length === 0 && (
         <div className="text-center py-16">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
-            <svg className="w-8 h-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
+            <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <p className="text-muted-foreground font-medium">No posts found</p>
-          <p className="text-muted-foreground/60 text-sm mt-1">Try a different search term.</p>
+          <p className="text-slate-500 font-medium">No posts found</p>
+          <p className="text-slate-400 text-sm mt-1">Try a different search term.</p>
         </div>
       )}
     </div>

@@ -33,7 +33,7 @@ export function BlogCard({
   return (
     <Link href={`${basePath}/${slug}`} className={`block group ${className}`}>
       <article
-        className={`h-full bg-card rounded-2xl border border-border/60 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/20 ${
+        className={`h-full bg-white rounded-2xl border border-slate-200/80 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/5 hover:-translate-y-1 hover:border-indigo-200 ${
           featured ? "md:flex md:flex-row" : ""
         }`}
       >
@@ -61,31 +61,29 @@ export function BlogCard({
         )}
         <div
           className={`p-6 flex flex-col ${
-            featured
-              ? "md:w-1/2 md:justify-center md:p-8"
-              : ""
+            featured ? "md:w-1/2 md:justify-center md:p-8" : ""
           }`}
         >
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-slate-500">
             <time dateTime={publishedAt}>{formattedDate}</time>
             {readingTime && (
               <>
-                <span className="text-border">|</span>
+                <span className="text-slate-300">|</span>
                 <span>{readingTime} min read</span>
               </>
             )}
           </div>
           <h3
-            className={`mt-3 font-semibold text-card-foreground leading-snug group-hover:text-primary transition-colors duration-200 ${
+            className={`mt-3 font-semibold text-slate-900 leading-snug group-hover:text-indigo-600 transition-colors duration-200 ${
               featured ? "text-2xl" : "text-lg"
             }`}
           >
             {title}
           </h3>
-          <p className="mt-2 text-muted-foreground text-sm leading-relaxed line-clamp-3 flex-1">
+          <p className="mt-2 text-slate-600 text-sm leading-relaxed line-clamp-3 flex-1">
             {excerpt}
           </p>
-          <span className="mt-4 inline-flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-0 group-hover:translate-x-1">
+          <span className="mt-4 inline-flex items-center text-sm font-medium text-indigo-600 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-0 group-hover:translate-x-1">
             Read article
             <svg
               className="ml-1 w-4 h-4"

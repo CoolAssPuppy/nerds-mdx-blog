@@ -26,7 +26,7 @@ const CopyIcon = () => (
 );
 
 const BUTTON_CLASS =
-  "inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-card border border-border/60 hover:border-border rounded-lg transition-all duration-150 hover:shadow-sm";
+  "inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 bg-white border border-slate-200 hover:border-slate-300 rounded-lg transition-all duration-150 hover:shadow-sm";
 
 export function BlogContent({ children, className = "" }: BlogContentProps): React.ReactElement {
   const [copiedArticle, setCopiedArticle] = useState(false);
