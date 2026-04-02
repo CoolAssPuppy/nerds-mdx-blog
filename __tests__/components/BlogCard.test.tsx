@@ -24,7 +24,7 @@ describe("BlogCard", () => {
 
   it("should render reading time when provided", () => {
     render(<BlogCard {...defaultProps} readingTime="5" />);
-    expect(screen.getByText(/5m read/)).toBeInTheDocument();
+    expect(screen.getByText(/5 min read/)).toBeInTheDocument();
   });
 
   it("should link to the post using basePath", () => {

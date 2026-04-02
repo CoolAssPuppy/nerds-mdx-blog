@@ -46,7 +46,7 @@ describe("TagNavigation", () => {
   it("should show the mobile toggle button with tag count", () => {
     render(<TagNavigation {...defaultProps} />);
     expect(
-      screen.getByText(`Browse all topics (${defaultProps.allTags.length})`)
+      screen.getByText(`Browse topics (${defaultProps.allTags.length})`)
     ).toBeInTheDocument();
   });
 

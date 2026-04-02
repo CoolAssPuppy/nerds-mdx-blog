@@ -33,7 +33,7 @@ export function BlogCard({
   return (
     <Link href={`${basePath}/${slug}`} className={`block group ${className}`}>
       <article
-        className={`h-full rounded-xl border border-border bg-card overflow-hidden transition-shadow hover:shadow-lg ${
+        className={`h-full bg-card rounded-2xl border border-border/60 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/20 ${
           featured ? "md:flex md:flex-row" : ""
         }`}
       >
@@ -49,40 +49,46 @@ export function BlogCard({
               src={featureImage}
               alt={title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes={
                 featured
                   ? "(max-width: 768px) 100vw, 50vw"
                   : "(max-width: 768px) 100vw, 33vw"
               }
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         )}
         <div
-          className={`p-6 ${
+          className={`p-6 flex flex-col ${
             featured
-              ? "md:w-1/2 md:flex md:flex-col md:justify-center"
+              ? "md:w-1/2 md:justify-center md:p-8"
               : ""
           }`}
         >
-          <div className="text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <time dateTime={publishedAt}>{formattedDate}</time>
             {readingTime && (
-              <span className="opacity-60"> | {readingTime}m read</span>
+              <>
+                <span className="text-border">|</span>
+                <span>{readingTime} min read</span>
+              </>
             )}
           </div>
           <h3
-            className={`mt-2 font-bold text-foreground group-hover:text-primary transition-colors ${
-              featured ? "text-2xl" : "text-xl"
+            className={`mt-3 font-semibold text-card-foreground leading-snug group-hover:text-primary transition-colors duration-200 ${
+              featured ? "text-2xl" : "text-lg"
             }`}
           >
             {title}
           </h3>
-          <p className="mt-3 text-muted-foreground line-clamp-3">{excerpt}</p>
-          <span className="mt-4 inline-flex items-center text-sm font-medium text-primary">
-            Read more
+          <p className="mt-2 text-muted-foreground text-sm leading-relaxed line-clamp-3 flex-1">
+            {excerpt}
+          </p>
+          <span className="mt-4 inline-flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-0 group-hover:translate-x-1">
+            Read article
             <svg
-              className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1"
+              className="ml-1 w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

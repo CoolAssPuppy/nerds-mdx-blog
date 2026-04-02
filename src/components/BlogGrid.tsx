@@ -100,9 +100,17 @@ export function BlogGrid({
 
   if (initialPosts.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground text-lg">
-          No blog posts yet. Check back soon!
+      <div className="text-center py-24">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+          <svg className="w-8 h-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+          </svg>
+        </div>
+        <p className="text-muted-foreground text-lg font-medium">
+          No blog posts yet
+        </p>
+        <p className="text-muted-foreground/60 text-sm mt-2">
+          Check back soon for new content.
         </p>
       </div>
     );
@@ -110,64 +118,62 @@ export function BlogGrid({
 
   return (
     <div className={className}>
-      <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-border -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl py-4">
-          <div className="relative">
-            <svg
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={handleQueryChange}
-              placeholder={`Search ${initialPosts.length} posts...`}
-              className="w-full pl-12 pr-10 py-3 text-base bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+      <div className="mb-10">
+        <div className="relative max-w-xl">
+          <svg
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/60"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
-            {query.length > 0 && (
-              <button
-                onClick={clearSearch}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Clear search"
+          </svg>
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={handleQueryChange}
+            placeholder={`Search ${initialPosts.length} posts...`}
+            className="w-full pl-12 pr-10 py-3.5 text-base bg-card border border-border/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all duration-200 placeholder:text-muted-foreground/50 shadow-sm"
+          />
+          {query.length > 0 && (
+            <button
+              onClick={clearSearch}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-all duration-150"
+              aria-label="Clear search"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            )}
-          </div>
-          {isFiltering && (
-            <p className="mt-3 text-sm text-muted-foreground">
-              {filteredPosts.length === 1
-                ? "1 post found"
-                : `${filteredPosts.length} posts found`}
-              {filteredPosts.length === 0 && ". Try a different search term."}
-            </p>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
           )}
         </div>
+        {isFiltering && (
+          <p className="mt-3 text-sm text-muted-foreground">
+            {filteredPosts.length === 1
+              ? "1 post found"
+              : `${filteredPosts.length} posts found`}
+            {filteredPosts.length === 0 && ". Try a different search term."}
+          </p>
+        )}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {postsToRender.map((post) => (
           <BlogCard
             key={post.slug}
@@ -184,9 +190,9 @@ export function BlogGrid({
       </div>
 
       {!isFiltering && hasMore && (
-        <div ref={loaderRef} className="flex justify-center py-12">
+        <div ref={loaderRef} className="flex justify-center py-16">
           {isLoading ? (
-            <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="flex items-center gap-3 text-muted-foreground">
               <svg
                 className="animate-spin h-5 w-5"
                 fill="none"
@@ -206,7 +212,7 @@ export function BlogGrid({
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span>Loading more posts...</span>
+              <span className="text-sm">Loading more...</span>
             </div>
           ) : (
             <div className="h-10" />
@@ -215,8 +221,14 @@ export function BlogGrid({
       )}
 
       {isFiltering && filteredPosts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground text-lg">No posts found</p>
+        <div className="text-center py-16">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+            <svg className="w-8 h-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <p className="text-muted-foreground font-medium">No posts found</p>
+          <p className="text-muted-foreground/60 text-sm mt-1">Try a different search term.</p>
         </div>
       )}
     </div>

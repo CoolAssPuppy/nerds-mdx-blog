@@ -26,7 +26,7 @@ const CopyIcon = () => (
 );
 
 const BUTTON_CLASS =
-  "inline-flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground border border-border hover:border-foreground/20 rounded-lg transition-colors";
+  "inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-card border border-border/60 hover:border-border rounded-lg transition-all duration-150 hover:shadow-sm";
 
 export function BlogContent({ children, className = "" }: BlogContentProps): React.ReactElement {
   const [copiedArticle, setCopiedArticle] = useState(false);
@@ -56,7 +56,7 @@ export function BlogContent({ children, className = "" }: BlogContentProps): Rea
 
   return (
     <div className={`relative ${className}`}>
-      <div className="flex justify-end gap-2 mb-4">
+      <div className="flex justify-end gap-2 mb-6">
         <button type="button" onClick={handleCopyLink} className={BUTTON_CLASS}>
           {copiedLink ? <CheckIcon /> : <LinkIcon />}
           <span>{copiedLink ? "Copied!" : "Copy link"}</span>

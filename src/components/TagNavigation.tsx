@@ -27,19 +27,19 @@ export function TagNavigation({
     <Link
       key={tag}
       href={`${basePath}/tag/${encodeURIComponent(tag)}`}
-      className={`px-3 py-1.5 text-sm rounded-full transition-colors ${
+      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm rounded-full transition-all duration-150 ${
         tag === currentTag
-          ? "bg-primary text-primary-foreground font-medium"
-          : "bg-card text-foreground hover:bg-muted border border-border"
+          ? "bg-primary text-primary-foreground font-medium shadow-sm shadow-primary/20"
+          : "bg-card text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/30 hover:bg-accent"
       }`}
     >
       {formatTagName(tag, tagAcronyms)}
-      <span className="ml-1 text-xs opacity-60">({tagCounts[tag]})</span>
+      <span className="text-xs opacity-50">({tagCounts[tag]})</span>
     </Link>
   );
 
   return (
-    <section className={`bg-muted border-b border-border ${className}`}>
+    <section className={`bg-muted/50 border-b border-border/60 ${className}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="md:hidden">
           <button
@@ -47,10 +47,10 @@ export function TagNavigation({
             className="w-full py-4 flex items-center justify-between text-foreground"
           >
             <span className="text-sm font-medium">
-              Browse all topics ({allTags.length})
+              Browse topics ({allTags.length})
             </span>
             <svg
-              className={`w-5 h-5 transition-transform duration-200 ${
+              className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
                 isExpanded ? "rotate-180" : ""
               }`}
               fill="none"
@@ -71,7 +71,7 @@ export function TagNavigation({
             </div>
           )}
         </div>
-        <div className="hidden md:block py-4">
+        <div className="hidden md:block py-5">
           <div className="flex flex-wrap gap-2 justify-center">
             {allTags.map(tagLink)}
           </div>
