@@ -2,7 +2,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
-import { remarkSocialEmbed } from "./remark-social-embed";
+import { remarkSocialEmbed } from "./remark-social-embed.js";
 
 type PluginPresetOptions = {
   readonly socialEmbeds?: boolean;

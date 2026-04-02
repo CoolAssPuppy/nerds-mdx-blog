@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { formatTagName } from "../data/format";
+import { formatTagName } from "../data/format.js";
 
 type TagNavigationProps = {
   readonly allTags: readonly string[];

@@ -4,7 +4,7 @@ import type {
   FAQItem,
   HowToStep,
   ResolvedBlogConfig,
-} from "../types";
+} from "../types.js";
 
 function isTechnicalArticle(post: BlogPost): boolean {
   if (post.articleType === "tech" || post.articleType === "howto") return true;

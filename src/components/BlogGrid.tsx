@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { BlogCard } from "./BlogCard";
+import { BlogCard } from "./BlogCard.js";
 
 type BlogGridPost = {
   readonly slug: string;

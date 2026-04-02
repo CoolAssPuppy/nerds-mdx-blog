@@ -6,8 +6,8 @@ import type {
   ResolvedBlogConfig,
   ManifestEntry,
   BlogManifest,
-} from "../types";
-import { listMdxFiles, parseMdxFile, parseMdxFileWithContent } from "./parse";
+} from "../types.js";
+import { listMdxFiles, parseMdxFile, parseMdxFileWithContent } from "./parse.js";
 
 function isPostPublished(
   publishedAt: string,

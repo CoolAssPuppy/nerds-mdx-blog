@@ -1,18 +1,18 @@
-export { createBlogDataLayer } from "./blog";
-export { calculateReadingTime, stripCodeBlocksAndComponents } from "./reading-time";
-export { generateManifest } from "./manifest";
-export { formatTagName } from "./format";
+export { createBlogDataLayer } from "./blog.js";
+export { calculateReadingTime, stripCodeBlocksAndComponents } from "./reading-time.js";
+export { generateManifest } from "./manifest.js";
+export { formatTagName } from "./format.js";
 export {
   getSlugFromFilename,
   parseMdxFile,
   parseMdxFileWithContent,
   listMdxFiles,
-} from "./parse";
-export { generateRssFeed, escapeXml } from "./rss";
+} from "./parse.js";
+export { generateRssFeed, escapeXml } from "./rss.js";
 export {
   generateArticleJsonLd,
   generateBreadcrumbJsonLd,
   generateFAQJsonLd,
   generateHowToJsonLd,
   generateCollectionJsonLd,
-} from "./json-ld";
+} from "./json-ld.js";

@@ -1,5 +1,5 @@
-import type { BlogManifest } from "../types";
-import { listMdxFiles, parseMdxFile } from "./parse";
+import type { BlogManifest } from "../types.js";
+import { listMdxFiles, parseMdxFile } from "./parse.js";
 
 export function generateManifest(contentDir: string): BlogManifest {
   const files = listMdxFiles(contentDir);

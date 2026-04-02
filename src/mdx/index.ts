@@ -1,9 +1,9 @@
-import { Callout } from "./Callout";
-import { CodeBlock } from "./CodeBlock";
-import { GitHubRepo } from "./GitHubRepo";
-import { Mermaid } from "./Mermaid";
-import { Video } from "./Video";
-import { TweetEmbed, YouTubeEmbed, InstagramEmbed } from "./SocialEmbed";
+import { Callout } from "./Callout.js";
+import { CodeBlock } from "./CodeBlock.js";
+import { GitHubRepo } from "./GitHubRepo.js";
+import { Mermaid } from "./Mermaid.js";
+import { Video } from "./Video.js";
+import { TweetEmbed, YouTubeEmbed, InstagramEmbed } from "./SocialEmbed.js";
 
 export {
   Callout,

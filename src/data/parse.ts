@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
-import type { BlogPost, ManifestEntry } from "../types";
-import { calculateReadingTime } from "./reading-time";
+import type { BlogPost, ManifestEntry } from "../types.js";
+import { calculateReadingTime } from "./reading-time.js";
 
 export function getSlugFromFilename(filename: string): string {
   return filename.replace(".mdx", "").replace(/^\d{8}-/, "");

@@ -1,4 +1,4 @@
-import { DEFAULT_TAG_ACRONYMS } from "../constants";
+import { DEFAULT_TAG_ACRONYMS } from "../constants.js";
 
 export function formatTagName(
   tag: string,

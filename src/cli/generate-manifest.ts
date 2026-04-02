@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { generateManifest } from "../data/manifest";
+import { generateManifest } from "../data/manifest.js";
 
 export function runGenerateManifest(contentDir?: string): void {
   const resolvedDir = contentDir

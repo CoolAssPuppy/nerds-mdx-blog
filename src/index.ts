@@ -14,56 +14,56 @@ export type {
   PublisherConfig,
   BlogSectionConfig,
   FeaturesConfig,
-} from "./types";
+} from "./types.js";
 
 // Config
-export { defineConfig, resolveConfig, createBlog } from "./config";
+export { defineConfig, resolveConfig, createBlog } from "./config.js";
 
 // Data
 export {
   calculateReadingTime,
   stripCodeBlocksAndComponents,
-} from "./data/reading-time";
-export { generateManifest } from "./data/manifest";
-export { formatTagName } from "./data/format";
+} from "./data/reading-time.js";
+export { generateManifest } from "./data/manifest.js";
+export { formatTagName } from "./data/format.js";
 
 // Plugins
 export {
   remarkSocialEmbed,
   matchSocialUrl,
-} from "./plugins/remark-social-embed";
-export { getRemarkPlugins, getRehypePlugins } from "./plugins/preset";
+} from "./plugins/remark-social-embed.js";
+export { getRemarkPlugins, getRehypePlugins } from "./plugins/preset.js";
 
 // MDX components
-export { getMdxComponents } from "./mdx";
-export { Callout } from "./mdx/Callout";
-export { CodeBlock } from "./mdx/CodeBlock";
-export { GitHubRepo } from "./mdx/GitHubRepo";
-export { Mermaid } from "./mdx/Mermaid";
-export { Video } from "./mdx/Video";
+export { getMdxComponents } from "./mdx/index.js";
+export { Callout } from "./mdx/Callout.js";
+export { CodeBlock } from "./mdx/CodeBlock.js";
+export { GitHubRepo } from "./mdx/GitHubRepo.js";
+export { Mermaid } from "./mdx/Mermaid.js";
+export { Video } from "./mdx/Video.js";
 export {
   TweetEmbed,
   YouTubeEmbed,
   InstagramEmbed,
-} from "./mdx/SocialEmbed";
+} from "./mdx/SocialEmbed.js";
 
 // Blog components
-export { BlogCard } from "./components/BlogCard";
-export { BlogGrid } from "./components/BlogGrid";
-export { BlogContent } from "./components/BlogContent";
+export { BlogCard } from "./components/BlogCard.js";
+export { BlogGrid } from "./components/BlogGrid.js";
+export { BlogContent } from "./components/BlogContent.js";
 export {
   TableOfContents,
   extractHeadings,
-} from "./components/TableOfContents";
-export { RelatedPosts } from "./components/RelatedPosts";
-export { TagNavigation } from "./components/TagNavigation";
+} from "./components/TableOfContents.js";
+export { RelatedPosts } from "./components/RelatedPosts.js";
+export { TagNavigation } from "./components/TagNavigation.js";
 
 // Generators
-export { generateRssFeed, escapeXml } from "./data/rss";
+export { generateRssFeed, escapeXml } from "./data/rss.js";
 export {
   generateArticleJsonLd,
   generateBreadcrumbJsonLd,
   generateFAQJsonLd,
   generateHowToJsonLd,
   generateCollectionJsonLd,
-} from "./data/json-ld";
+} from "./data/json-ld.js";

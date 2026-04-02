@@ -1,6 +1,6 @@
-import type { BlogConfig, BlogInstance, ResolvedBlogConfig } from "./types";
-import { createBlogDataLayer } from "./data/blog";
-import { DEFAULT_TAG_ACRONYMS } from "./constants";
+import type { BlogConfig, BlogInstance, ResolvedBlogConfig } from "./types.js";
+import { createBlogDataLayer } from "./data/blog.js";
+import { DEFAULT_TAG_ACRONYMS } from "./constants.js";
 
 export function defineConfig(config: BlogConfig): BlogConfig {
   return config;

@@ -1,6 +1,6 @@
-export { BlogCard } from "./BlogCard";
-export { BlogGrid } from "./BlogGrid";
-export { BlogContent } from "./BlogContent";
-export { TableOfContents, extractHeadings } from "./TableOfContents";
-export { RelatedPosts } from "./RelatedPosts";
-export { TagNavigation } from "./TagNavigation";
+export { BlogCard } from "./BlogCard.js";
+export { BlogGrid } from "./BlogGrid.js";
+export { BlogContent } from "./BlogContent.js";
+export { TableOfContents, extractHeadings } from "./TableOfContents.js";
+export { RelatedPosts } from "./RelatedPosts.js";
+export { TagNavigation } from "./TagNavigation.js";

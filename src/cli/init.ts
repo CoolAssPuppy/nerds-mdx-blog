@@ -1,21 +1,21 @@
 import path from "path";
-import { detectProject } from "./detect";
+import { detectProject } from "./detect.js";
 import {
   writeFileIfNotExists,
   addPrebuildScript,
   patchTailwindConfig,
   patchNextConfig,
-} from "./patch";
-import { blogConfigTemplate } from "./templates/blog-config";
-import { blogLibTemplate } from "./templates/blog-lib";
-import { blogPageTemplate } from "./templates/blog-page";
-import { blogSlugPageTemplate } from "./templates/blog-slug-page";
-import { blogTagPageTemplate } from "./templates/blog-tag-page";
-import { rssRouteTemplate } from "./templates/rss-route";
-import { blogApiRouteTemplate } from "./templates/blog-api-route";
-import { markdownRouteTemplate } from "./templates/markdown-route";
-import { samplePost1, samplePost2 } from "./templates/sample-posts";
-import { generateManifest } from "../data/manifest";
+} from "./patch.js";
+import { blogConfigTemplate } from "./templates/blog-config.js";
+import { blogLibTemplate } from "./templates/blog-lib.js";
+import { blogPageTemplate } from "./templates/blog-page.js";
+import { blogSlugPageTemplate } from "./templates/blog-slug-page.js";
+import { blogTagPageTemplate } from "./templates/blog-tag-page.js";
+import { rssRouteTemplate } from "./templates/rss-route.js";
+import { blogApiRouteTemplate } from "./templates/blog-api-route.js";
+import { markdownRouteTemplate } from "./templates/markdown-route.js";
+import { samplePost1, samplePost2 } from "./templates/sample-posts.js";
+import { generateManifest } from "../data/manifest.js";
 import fs from "fs";
 
 type InitOptions = {

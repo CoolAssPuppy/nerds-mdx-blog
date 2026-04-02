@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { runInit } from "./init";
-import { runGenerateManifest } from "./generate-manifest";
+import { runInit } from "./init.js";
+import { runGenerateManifest } from "./generate-manifest.js";
 
 const args = process.argv.slice(2);
 const command = args[0];

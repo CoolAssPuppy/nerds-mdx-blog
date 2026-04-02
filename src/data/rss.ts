@@ -1,4 +1,4 @@
-import type { BlogPost, ResolvedBlogConfig } from "../types";
+import type { BlogPost, ResolvedBlogConfig } from "../types.js";
 
 export function escapeXml(text: string): string {
   return text
