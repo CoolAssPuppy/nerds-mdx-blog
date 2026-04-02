@@ -4,5 +4,6 @@ dist/
 .env.local
 .DS_Store
 *.tsbuildinfo
+*.tgz
 .claude/settings.local.json
 CLAUDE.local.md
