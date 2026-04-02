@@ -4,7 +4,7 @@ import path from "path";
 import os from "os";
 import {
   addPrebuildScript,
-  patchTailwindConfig,
+  patchTailwindV3Config,
   patchNextConfig,
   writeFileIfNotExists,
 } from "@/cli/patch";
@@ -87,14 +87,14 @@ describe("addPrebuildScript", () => {
   });
 });
 
-describe("patchTailwindConfig", () => {
+describe("patchTailwindV3Config", () => {
   it("should add content path to tailwind.config.ts", () => {
     createFile(
       "tailwind.config.ts",
       'export default { content: [\n  "./src/**/*.tsx"\n] };'
     );
 
-    patchTailwindConfig(tmpDir, "content/blog");
+    patchTailwindV3Config(tmpDir, "content/blog");
 
     const content = readFile("tailwind.config.ts");
     expect(content).toContain("nerds-mdx-blog");
@@ -106,7 +106,7 @@ describe("patchTailwindConfig", () => {
       'module.exports = { content: [\n  "./src/**/*.tsx"\n] };'
     );
 
-    patchTailwindConfig(tmpDir, "content/blog");
+    patchTailwindV3Config(tmpDir, "content/blog");
 
     const content = readFile("tailwind.config.js");
     expect(content).toContain("nerds-mdx-blog");
@@ -118,7 +118,7 @@ describe("patchTailwindConfig", () => {
       'export default { content: [\n  "./src/**/*.tsx"\n] };'
     );
 
-    patchTailwindConfig(tmpDir, "content/blog");
+    patchTailwindV3Config(tmpDir, "content/blog");
 
     const content = readFile("tailwind.config.mjs");
     expect(content).toContain("nerds-mdx-blog");
@@ -129,14 +129,14 @@ describe("patchTailwindConfig", () => {
       'export default { content: [\n  "./node_modules/@strategicnerds/nerds-mdx-blog/dist/**/*.{js,jsx}",\n  "./src/**/*.tsx"\n] };';
     createFile("tailwind.config.ts", original);
 
-    patchTailwindConfig(tmpDir, "content/blog");
+    patchTailwindV3Config(tmpDir, "content/blog");
 
     const content = readFile("tailwind.config.ts");
     expect(content).toBe(original);
   });
 
   it("should do nothing when no tailwind config exists", () => {
-    patchTailwindConfig(tmpDir, "content/blog");
+    patchTailwindV3Config(tmpDir, "content/blog");
     // No error thrown, no files created
     expect(fs.existsSync(path.join(tmpDir, "tailwind.config.ts"))).toBe(false);
   });

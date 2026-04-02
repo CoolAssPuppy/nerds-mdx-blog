@@ -16,10 +16,7 @@ export function addPrebuildScript(projectRoot: string): void {
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
 }
 
-export function patchTailwindConfig(
-  projectRoot: string,
-  _packageContentPath: string
-): void {
+export function patchTailwindV3Config(projectRoot: string): void {
   const candidates = [
     "tailwind.config.ts",
     "tailwind.config.js",
@@ -41,6 +38,33 @@ export function patchTailwindConfig(
     }
     break;
   }
+}
+
+export function patchTailwindV4Css(
+  projectRoot: string,
+  globalCssPath: string
+): void {
+  const cssPath = path.join(projectRoot, globalCssPath);
+  let content = fs.readFileSync(cssPath, "utf-8");
+
+  if (content.includes("nerds-mdx-blog")) return;
+
+  const sourceDirective =
+    '@source "../node_modules/@strategicnerds/nerds-mdx-blog/dist";';
+
+  if (content.includes('@import "tailwindcss"')) {
+    content = content.replace(
+      '@import "tailwindcss"',
+      `@import "tailwindcss";\n${sourceDirective}`
+    );
+  } else if (content.includes("@import 'tailwindcss'")) {
+    content = content.replace(
+      "@import 'tailwindcss'",
+      `@import 'tailwindcss';\n${sourceDirective}`
+    );
+  }
+
+  fs.writeFileSync(cssPath, content);
 }
 
 export function patchNextConfig(projectRoot: string): void {

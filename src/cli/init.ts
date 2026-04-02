@@ -3,7 +3,8 @@ import { detectProject } from "./detect.js";
 import {
   writeFileIfNotExists,
   addPrebuildScript,
-  patchTailwindConfig,
+  patchTailwindV3Config,
+  patchTailwindV4Css,
   patchNextConfig,
 } from "./patch.js";
 import { blogConfigTemplate } from "./templates/blog-config.js";
@@ -109,9 +110,16 @@ export function runInit(options: InitOptions = {}): InitResult {
       warnings.push("Could not patch package.json. Add prebuild script manually.");
     }
 
-    if (project.hasTailwind) {
+    if (project.hasTailwindV4 && project.globalCssPath) {
       try {
-        patchTailwindConfig(projectRoot, "@strategicnerds/nerds-mdx-blog");
+        patchTailwindV4Css(projectRoot, project.globalCssPath);
+        filesModified.push(project.globalCssPath);
+      } catch {
+        warnings.push("Could not patch global CSS for Tailwind v4. Add @source directive manually.");
+      }
+    } else if (project.hasTailwindV3) {
+      try {
+        patchTailwindV3Config(projectRoot);
         filesModified.push("tailwind.config.*");
       } catch {
         warnings.push("Could not patch tailwind config.");
